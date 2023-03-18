@@ -15,7 +15,7 @@ class CreateFoodStatusTable extends Migration
     {
         Schema::create('food_status', function (Blueprint $table) {
             $table->id();
-            $table->integer('food_now_flag'); // 0 or 1. 1 means ESP device needs to give food now. why no boolean?? uhhh zo aangeleerd door docent
+            $table->boolean('food_now_flag'); // 0 or 1. 1 means ESP device needs to give food now. why no boolean?? uhhh zo aangeleerd door docent
             $table->timestamps(); //default. creates created_at and updated_at TIMESTAMP columns
         });
     }

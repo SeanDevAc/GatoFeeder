@@ -42,6 +42,10 @@
         <p> stock_weight_grams in stock_infos: {{$stock_info->stock_weight_grams}} </p>
         <p> tray_info: {{$tray_info}}</p>
         <p> food_timers: {{$food_timer->time_to_execute}}</p>
+        <br>
+        <a href="/food_now_true">FEED NOW!!!</a>
+        <br> <br>
+        <a href="/food_is_given">set food_now_flag to 0. returns 0.</a>
     </section>
 </body>
 </html>

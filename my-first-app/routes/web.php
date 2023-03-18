@@ -25,3 +25,4 @@ Route::get('/button_pressed', [CountController::class, 'button_pressed']);
 // als /, dan callt het 'index' in class FoodStatusController
 Route::get('/', [MainController::class, 'index']); 
 Route::get('/food_now_true', [FoodStatusController::class, 'food_now_true']);
+Route::get('/food_is_given', [FoodStatusController::class, 'food_is_given']);
