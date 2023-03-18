@@ -25,5 +25,9 @@ class DatabaseSeeder extends Seeder
         DB::table('food_status')->insert([
             'food_now_flag' => 0,
         ]);
+
+        DB::table('stock_weight')->insert([
+            'stock_weight_gramsf' => 0,
+        ]);
     }
 }

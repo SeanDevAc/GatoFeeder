@@ -36,13 +36,10 @@
 </head>
 <body>
     <section>
-        <p> times pressed: <b> {{$count->times_pressed}}</b> </p>
-        <p> led state is <b>{{$led->led_is_on}}</b></p>
+        
         <br>
-        <a href="toggle_led">Click here for LED change</a>
-        <br>
-        <br>
-        <p> food_now: {{$ food_now_flag}}</p>
+        <p> food_now: {{$food_now_status->food_now_flag}}</p>
+        <p> stock_info: {{}} </p>
     </section>
 </body>
 </html>
