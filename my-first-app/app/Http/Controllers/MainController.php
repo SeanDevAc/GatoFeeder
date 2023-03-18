@@ -13,7 +13,9 @@ class MainController extends Controller
     function index() {
         $food_status = FoodStatus::first();
         $stock_info = StockInfo::first();
-        $tray_info = TrayInfo::first();
+
+        $tray_info = TrayInfo::latest()->take(1)->get();
+
         $food_timer = FoodTimer::first();
 
         return view('home')->
