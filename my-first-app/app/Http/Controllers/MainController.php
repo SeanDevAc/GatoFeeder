@@ -8,7 +8,7 @@ use App\Models\StockInfo;
 use App\Models\TrayInfo;
 use App\Models\FoodTimer;
 
-class FoodStatusController extends Controller
+class MainController extends Controller
 {
     function index() {
         $food_status = FoodStatus::first();

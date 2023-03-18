@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LedController;
 use App\Http\Controllers\CountController;
 use App\Http\Controllers\FoodStatusController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,5 @@ Route::get('/get_led_state', [LedController::class, 'get_led_state']);
 Route::get('/button_pressed', [CountController::class, 'button_pressed']);
 
 // als /, dan callt het 'index' in class FoodStatusController
-Route::get('/', [FoodStatusController::class, 'index']); 
+Route::get('/', [MainController::class, 'index']); 
+Route::get('/food_now_true', [FoodStatusController::class, 'food_now_true']);

@@ -38,8 +38,10 @@
     <section>
         
         <br>
-        <p> food_now: {{$food_now_status->food_now_flag}}</p>
-        <p> stock_info: {{}} </p>
+        <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
+        <p> stock_weight_grams in stock_infos: {{$stock_info->stock_weight_grams}} </p>
+        <p> tray_info: {{$tray_info}}</p>
+        <p> food_timers: {{$food_timer->time_to_execute}}</p>
     </section>
 </body>
 </html>

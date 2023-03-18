@@ -23,11 +23,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('food_status')->insert([
-            'food_now_flag' => 0,
+            'food_now_flag' => false,
         ]);
 
-        DB::table('stock_weight')->insert([
-            'stock_weight_gramsf' => 0,
+        DB::table('stock_infos')->insert([
+            'stock_weight_grams' => 0,
+        ]);
+
+        DB::table('tray_infos')->insert([
+            'tray_weight_grams' => 0.00,
+        ]);
+
+        DB::table('food_timers')->insert([ //test values.
+            'time_to_execute' => '07:00:00',
+            'amount_in_grams' => 40,
+            'enabled' => true,
+        ]);
+        
+        DB::table('food_timers')->insert([
+            'time_to_execute' => '13:00:00',
+            'amount_in_grams' => 60,
+            'enabled' => false,
         ]);
     }
 }
