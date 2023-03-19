@@ -40,10 +40,11 @@
         <br>
         <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
         <br>
-        <p> Current stock: {{$stock_info->stock_weight_grams}} grams. 
-            last updated: {{$stock_info->created_at}}</p>
+        <p> Current stock: {{$stock_info->stock_weight_grams}} grams. </p>
+        <p> last updated: {{$stock_info->created_at}}</p>
         <br>
-        <p> tray_info: {{'hoi'}}</p>
+        <p> Left in feeding tray: {{$tray_info->tray_weight_grams}} grams.</p>
+        <p> last updated: {{$tray_info->created_at}} </p>
         <br>
 
         <table>
