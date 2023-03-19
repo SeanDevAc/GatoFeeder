@@ -41,8 +41,23 @@
         <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
         <p> stock_weight_grams in stock_infos: {{$stock_info->stock_weight_grams}} </p>
         <p> tray_info: {{'hoi'}}</p>
-        <p> food_timers: {{$food_timer->time_to_execute}}</p>
         <br>
+
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>How much?</th>
+            </tr>
+        @foreach ($food_timers as $timer) 
+            <tr> 
+                <td> {{Illuminate\Support\Str::substr($timer->time_to_execute, 0,5)}} </td>
+                <td> {{$timer->amount_in_grams}} </td>
+            </tr>
+        @endforeach
+
+        </table>
+
+        <br><br>
         <a href="/food_now_true">FEED NOW!!!</a>
         <br> <br>
         <a href="/food_is_given">set food_now_flag to 0. returns 0.</a>

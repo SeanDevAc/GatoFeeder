@@ -16,13 +16,13 @@ class MainController extends Controller
         $stock_info = StockInfo::latest('id')->first();
         $tray_info = TrayInfo::latest('id')->first();
         //return $tray_info;
-        $food_timer = FoodTimer::first();
+        $food_timers = FoodTimer::all();
 
         return view('home')->
             with('food_status', $food_status)->
             with('stock_info', $stock_info)->
             with('tray_info', $tray_info)->
-            with('food_timer', $food_timer)
+            with('food_timers', $food_timers)
             ;
     }
 }
