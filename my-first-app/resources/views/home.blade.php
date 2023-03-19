@@ -39,7 +39,10 @@
         
         <br>
         <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
-        <p> stock_weight_grams in stock_infos: {{$stock_info->stock_weight_grams}} </p>
+        <br>
+        <p> Current stock: {{$stock_info->stock_weight_grams}} grams. 
+            last updated: {{$stock_info->created_at}}</p>
+        <br>
         <p> tray_info: {{'hoi'}}</p>
         <br>
 
@@ -51,7 +54,7 @@
         @foreach ($food_timers as $timer) 
             <tr> 
                 <td> {{Illuminate\Support\Str::substr($timer->time_to_execute, 0,5)}} </td>
-                <td> {{$timer->amount_in_grams}} </td>
+                <td> {{$timer->amount_in_grams}} grams </td>
             </tr>
         @endforeach
 
