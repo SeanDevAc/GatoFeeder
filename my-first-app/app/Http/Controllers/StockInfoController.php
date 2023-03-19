@@ -9,6 +9,7 @@ class StockInfoController extends Controller
 {
     // here: specific StockInfo methods that aren't handled by FoodStatusController 
     public function set_stock_weight(int $weight) {
+        // iets van laatste entry pakken en dan timestamp vergelijken met current time?
         $stock_info = new StockInfo;
         $stock_info->stock_weight_grams = $weight;
         $stock_info->save();

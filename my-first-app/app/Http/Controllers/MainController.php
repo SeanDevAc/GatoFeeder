@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+//use DB;
 use Illuminate\Http\Request;
 use App\Models\FoodStatus;
 use App\Models\StockInfo;
@@ -12,10 +13,9 @@ class MainController extends Controller
 {
     function index() {
         $food_status = FoodStatus::first();
-        $stock_info = StockInfo::first();
-
-        $tray_info = TrayInfo::latest()->take(1)->get();
-
+        $stock_info = StockInfo::latest('id')->first();
+        $tray_info = TrayInfo::latest('id')->first();
+        //return $tray_info;
         $food_timer = FoodTimer::first();
 
         return view('home')->
