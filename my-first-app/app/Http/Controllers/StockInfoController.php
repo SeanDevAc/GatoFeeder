@@ -19,4 +19,11 @@ class StockInfoController extends Controller
         // ]);
         return $weight;
     }
+
+    public function set_stock(Request $request) {
+        //$weight = $request->input('weight');
+        $weight = $request->weight;
+        return $weight;
+    }
+
 }

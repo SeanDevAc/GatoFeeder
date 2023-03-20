@@ -37,6 +37,12 @@
 <body>
     <section>
         
+        <form action="/set_stock" method="post">
+            <label for="weight">set stock weight</label>
+            <input type="text" id="weight" name="weight">
+            @csrf
+        </form>
+        
         <br>
         <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
         <br>
