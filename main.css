@@ -1,0 +1,141 @@
+:root {
+    --accent: #FFB800;
+    --dark: #1E2730;
+    --darker: #1D252D;
+    --white: #ffffff;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-weight: 500;
+    font-family: 'Archivo', sans-serif;
+    color: var(--accent);
+    background-color: var(--dark);
+    font-size: 18px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.nav{
+background-color: var(--darker);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h1{
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h1:before {
+    content: attr(data-content);
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+    overflow: hidden;
+    color: var(--accent);
+}
+
+h2{
+    color:var(--dark);
+    font-weight: 500;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0%;
+}
+
+.Schedule{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: var(--accent);
+    border: 3px solid var(--white);
+    border-radius: 16px;
+    cursor: pointer;
+    flex-grow: 1;
+    margin: 0% 5%;
+    max-width: 600px;
+}
+
+.Stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: var(--accent);
+    border: 3px solid var(--white);
+    border-radius: 16px;
+    cursor: pointer;
+    flex-grow: 1;
+    margin: 0% 5%;
+    max-width: 600px;
+}
+
+table{
+    width: 100%;
+    color: var(--dark);
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 3px solid var(--white);
+}
+
+.toptime{
+    border-top: 3px solid var(--white);
+}
+
+.bottomtime{
+    border-bottom: none;
+}
+
+.topstat {
+    border-top: 3px solid var(--white);
+}
+
+.bottomstat {
+    border-bottom: none;
+}
+
+.button {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: var(--accent);
+    border: 3px solid var(--white);
+    border-radius: 16px;
+    color: var(--dark);
+    font-weight: 500;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    flex-grow: 1;
+    margin: 0% 5%;
+    max-width: 600px;
+}
