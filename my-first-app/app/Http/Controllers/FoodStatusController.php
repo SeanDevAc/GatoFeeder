@@ -33,4 +33,9 @@ class FoodStatusController extends Controller
         // bad flow: food_now_flag is already 0. extra food has been given
         return 'food_now_flag is already set to 0. check your cat!!!';
     }
+
+    public function check_food_state() {
+        $food_status = FoodStatus::first();
+        return $food_status->food_now_flag;
+    }
 }

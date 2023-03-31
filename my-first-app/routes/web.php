@@ -27,5 +27,7 @@ use App\Http\Controllers\StockInfoController;
 Route::get('/', [MainController::class, 'index']); 
 Route::get('/food_now_true', [FoodStatusController::class, 'food_now_true']);
 Route::get('/food_is_given', [FoodStatusController::class, 'food_is_given']);
+Route::get('/check_food_state', [FoodStatusController::class, 'check_food_state']);
 
-Route::get('/set_stock_weight/{weight}', [StockInfoController::class,  'set_stock_weight'])->whereNumber('weight');
+//Route::get('/set_stock_weight/{weight}', [StockInfoController::class,  'set_stock_weight'])->whereNumber('weight');
+Route::post('/set_stock_weight', [StockInfoController::class, 'set_stock_weight']);

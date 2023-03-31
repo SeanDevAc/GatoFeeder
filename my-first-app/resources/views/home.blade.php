@@ -159,7 +159,14 @@
     </section>
     <section>
         
-        <!-- <br>
+        <!-- <form action="/set_stock_weight" method="post">
+            <label for="weight">set stock weight</label>
+            <input type="text" id="weight" name="weight">
+            @csrf
+        </form>
+        
+        <br>
+        <br>
         <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
         <br>
         <p> Current stock: {{$stock_info->stock_weight_grams}} grams. </p>
@@ -168,6 +175,7 @@
         <p> Left in feeding tray: {{$tray_info->tray_weight_grams}} grams.</p>
         <p> last updated: {{$tray_info->created_at}} </p>
         <br> -->
+
         <br>
         <section class="Schedule">
         <h2>Schedule:</h2>
