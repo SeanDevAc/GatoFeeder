@@ -4,26 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Eater&family=Syne+Mono&family=Syne:wght@400;500;600;700&family=Unica+One&display=swap" rel="stylesheet">
+    <title>GatoFeeder</title>
     <link rel="stylesheet" href="css/app.css">
     <style>
-        body
-        {
-            box-sizing: border-box;
-            background-color: lightblue;
-            color: brown;
-            font-size: 24px;
-            font-family: sans-serif;
-            text-align: center;
-        }
 
-        a, a:visited, a:active
-        {
-            color: black;
-            text-decoration: none;
-        }
-
-        section 
+        /* section 
         {
             width: 40%;
             padding: 30px;
@@ -31,23 +17,162 @@
             margin-top:200px;
             background-color: pink;
             border-radius: 12px;
+        } */
+
+
+        :root {
+            --accent: #FFB800;
+            --dark: #1E2730;
+            --darker: #1D252D;
+            --white: #ffffff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-weight: 500;
+            font-family: 'Archivo', sans-serif;
+            color: var(--accent);
+            background-color: var(--dark);
+            font-size: 18px;
+        }
+
+        .nav{
+        background-color: var(--darker);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        h1{
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: normal;
+            display: flex;
+            justify-content: center;
+            margin: 0.5rem;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        h1:before {
+            content: attr(data-content);
+            display: flex;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            font-size: 2rem;
+            overflow: hidden;
+            color: var(--accent);
+        }
+
+        h2{
+            color: var(--dark);
+            font-weight: 500;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-size: 1.4em
+        }
+
+        .card{
+            display: flex;
+            justify-content: center;
+            margin: 20px 0%;
+        }
+
+        .Schedule{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            background-color: var(--accent);
+            border: 3px solid var(--white);
+            border-radius: 16px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin: 0% 5%;
+            max-width: 600px;
+        }
+
+        .Stats {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            background-color: var(--accent);
+            border: 3px solid var(--white);
+            border-radius: 16px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin: 0% 5%;
+            max-width: 600px;
+        }
+
+        table{
+            width: 100%;
+            color: var(--dark);
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-top: 3px solid var(--white);
+            border-bottom: none;
+        }
+
+        .topstat {
+            border-top: 3px solid var(--white);
+        }
+
+        .bottomstat {
+            border-bottom: none;
+        }
+
+        .button {
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            background-color: var(--accent);
+            border: 3px solid var(--white);
+            border-radius: 16px;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            flex-grow: 1;
+            margin: 0% 5%;
+            max-width: 600px;
         }
     </style>
 </head>
 <body>
+<section class="nav"> 
+    <a href="index.html"><h1 data-content="Gato">feeder</h1></a>
+    </section>
     <section>
         
-        <br>
+        <!-- <br>
         <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
         <br>
-        <p> Current stock: {{$stock_info->stock_weight_grams}} grams. 
-            last updated: {{$stock_info->created_at}}</p>
+        <p> Current stock: {{$stock_info->stock_weight_grams}} grams. </p>
+        <p> last updated: {{$stock_info->created_at}}</p>
         <br>
-        <p> tray_info: {{'hoi'}}</p>
+        <p> Left in feeding tray: {{$tray_info->tray_weight_grams}} grams.</p>
+        <p> last updated: {{$tray_info->created_at}} </p>
+        <br> -->
         <br>
-
+        <section class="Schedule">
+        <h2>Schedule:</h2>
         <table>
-            <tr>
+            <tr class="toptime">
                 <th>Time</th>
                 <th>How much?</th>
             </tr>
@@ -57,13 +182,79 @@
                 <td> {{$timer->amount_in_grams}} grams </td>
             </tr>
         @endforeach
-
         </table>
+      </section>
+
+        <section class="card">
+        <a href="/food_now_true" class="button">Feed Simba</a>
+        </section>
+
+        <section class="Stats">
+        <h2 class="Statstext">Stats:</h2>
+        <table>
+        <tr class="topstat">
+            <td>Stock: {{$stock_info->stock_weight_grams}}</td>
+            <td id="valuestock"></td>  
+        </tr>
+        <tr class="bottomstat">
+             <td class="bottomstat"><!--Fed:--> Remaining in feeding tray: {{$tray_info->tray_weight_grams}} grams</td>
+            <td id="valuefed" class="bottomstat"></td>  
+        </tr>   
+        </table>
+        </section>
 
         <br><br>
-        <a href="/food_now_true">FEED NOW!!!</a>
-        <br> <br>
         <a href="/food_is_given">set food_now_flag to 0. returns 0.</a>
-    </section>
+        </section>
+
+        <form action="/set_stock" method="post">
+            <label for="weight">set stock weight</label>
+            <input type="text" id="weight" name="weight">
+            @csrf
+        </form>
 </body>
 </html>
+<!-- 
+<body>
+    <section class="nav"> 
+    <a href="index.html"><h1 data-content="Gato">feeder</h1></a>
+    </section>
+    <section class="card">
+    <section class="Schedule">
+        <h2>Schedule:</h2>
+    <table>
+        <tr class="toptime">
+            <td id="dawntime">7:30</td>
+            <td id="dawnfood">20 kg</td>  
+        </tr>
+        <tr>
+            <td id="noontime">12:30</td>
+            <td id="noonfood">40 kg</td>  
+        </tr>
+        <tr class="bottomtime">
+            <td id="dusktime" class="bottomtime">19:30</td>
+            <td id="duskfood" class="bottomtime">30 kg</td>  
+        </tr>    
+    </table>
+    </section>
+    </section>
+    <section class="card">
+    <a href="#" class="button">Feed Simba</a>
+    </section>
+    <section class="card">
+
+    <section class="Stats">
+        <h2>Stats:</h2>
+    <table>
+        <tr class="topstat">
+            <td>Stock: {{$stock_info->stock_weight_grams}}</td>
+            <td id="valuestock"></td>  
+        </tr>
+        <tr class="bottomstat">
+             <td class="bottomstat">Fed: {{$tray_info->tray_weight_grams}} grams</td>
+            <td id="valuefed" class="bottomstat"></td>  
+        </tr>   
+    </table>
+    </section>
+</body>
+</html> -->
