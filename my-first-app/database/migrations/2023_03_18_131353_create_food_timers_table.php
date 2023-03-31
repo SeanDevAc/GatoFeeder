@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStockInfosTable extends Migration
+class CreateFoodTimersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateStockInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock_infos', function (Blueprint $table) {
+        Schema::create('food_timers', function (Blueprint $table) {
             $table->id();
-            $table->integer('stock_weight_grams');
+            $table->time('time_to_execute'); 
+            $table->integer('amount_in_grams');
+            $table->boolean('enabled'); //lets see if using boolean instead of integer breaks smth
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateStockInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock_infos');
+        Schema::dropIfExists('food_timers');
     }
 }
