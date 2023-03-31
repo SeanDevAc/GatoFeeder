@@ -1,0 +1,100 @@
+functies schrijven voor button, motorhandeling. gewicht stock
+
+getFeedNowState();
+
+
+
+overige code(misschien handig)
+// int enough_time_passed(){
+// if(millis() > start_time + REQUEST_INTERVAL_TIME) {
+//     start_time = millis();
+//     return true;
+//   } else{
+//     return false;
+//   }
+//  }
+
+
+// void set_remote_button(){
+// // wait for WiFi connection
+//     if((wifiMulti.run() == WL_CONNECTED)) {
+
+//         HTTPClient http;
+
+//         // configure traged server and url
+//         http.begin("http://baspi.local/button_pressed");
+        
+
+
+//         // start connection and send HTTP header
+//         int httpCode = http.GET();
+
+//         // httpCode will be negative on error
+//         if(httpCode > 0) {
+//             // HTTP header has been send and Server response header has been handled
+
+
+//             // file found at server
+//             if(httpCode == HTTP_CODE_OK) {
+//                 String payload = http.getString();
+//                 //USE_SERIAL.println(payload);
+                
+//             }
+//         } else {
+//            // USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+//         }
+
+//         http.end();
+//     }
+// }
+
+// void set_led(int led_state){
+//  if(led_state ==1){
+//    digitalWrite(LED_PIN, HIGH);
+//    Serial.println("led aan");
+//  } else{
+//    digitalWrite(LED_PIN, LOW);
+//    Serial.println("led uit");
+//  }
+// }
+
+// void get_remote_led_state(){
+
+//   if(enough_time_passed()){
+//     Serial.println("nog even wachten....");
+//    return;
+//   }else{
+//     Serial.println("Je mag de LED state halen!!!");
+//   }
+  
+//   if((wifiMulti.run() == WL_CONNECTED)) {
+
+//         HTTPClient http;
+
+//         // configure traged server and url
+//         http.begin("http://baspi.local/get_led_state");
+        
+
+
+//         // start connection and send HTTP header
+//         int httpCode = http.GET();
+
+//         // httpCode will be negative on error
+//         if(httpCode > 0) {
+//             // file found at server
+//             if(httpCode == HTTP_CODE_OK) {
+//                 String payload = http.getString();
+//                 led_state = payload.toInt();
+//                 set_led(led_state);
+//                 USE_SERIAL.println(led_state);
+
+//             }
+//         } else {
+//            // USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+//         }
+
+//         http.end();
+//   }
+// }
+
+//
