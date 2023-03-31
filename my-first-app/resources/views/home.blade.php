@@ -37,7 +37,7 @@
 <body>
     <section>
         
-        <form action="/set_stock" method="post">
+        <form action="/set_stock_weight" method="post">
             <label for="weight">set stock weight</label>
             <input type="text" id="weight" name="weight">
             @csrf
