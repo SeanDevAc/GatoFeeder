@@ -10,8 +10,9 @@
 WiFiMulti wifiMulti;
 
 
-const char* ssid = "meme-device";
+const char* ssid = "meme-master";
 const char* password = "driekeerhoi";
+String websiteUrl = "willempi.local/";
 
 //int food_now_state = 0; //de int om de state te veranderen
 //int food_state = 0; // de int voor het checken van de state
@@ -22,16 +23,24 @@ void setup() {
 
   Serial.println("setup started..");
   delay(1000);
-  //init wifi
+
+  while (WiFi.status() != WL_CONNECTED){
+    init_wifi();
+  }
+
+}
+
+void init_wifi () {
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-  Serial.print("connecting to wifi..");
-  while (WiFi.status() != WL_CONNECTED) {
+  Serial.println("connecting to wifi..");
+  int i = 0;
+  while ((WiFi.status() != WL_CONNECTED) && (i<20)) { //while NOT connected for 20 seconds
     Serial.print(".");
     delay(1000);
+    i++;
   }
   Serial.println(WiFi.localIP());
-  
 }
 
 int check_food_state() {
@@ -55,7 +64,7 @@ int check_food_state() {
 int set_food_is_given() {
   int food_now_state = 0;
   HTTPClient http;
-  http.begin("http://wimpi.local/food_is_given");
+  http.begin(websiteUrl + "food_is_given");
   int httpCode = http.GET();
   if (httpCode > 0) {
     if (httpCode == HTTP_CODE_OK) {
@@ -72,7 +81,8 @@ int set_food_is_given() {
 void set_stock_weight(int weight) {
   WiFiClient client;
   HTTPClient http;
-  http.begin(client, "http://wimpi.local/set_stock_weight");
+  http.begin(client, "willempi.local/set_stock_weight");
+  // http.begin(client, websiteUrl + "set_stock_weight");
   http.addHeader("Content-Type", "text/plain");
 
   int httpResponseCode = http.POST(String(weight));
@@ -91,8 +101,11 @@ int get_food_amount() {
 
 void loop() {
 
+  // Serial.println(WiFi.localIP());
   Serial.println("attempting to set weight");
-  set_stock_weight(322);
+  //set_stock_weight(322);
+
+  set_food_is_given();
   delay(5000);
 
   
