@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Eater&family=Syne+Mono&family=Syne:wght@400;500;600;700&family=Unica+One&display=swap" rel="stylesheet">
     <title>GatoFeeder</title>
-    <link rel="stylesheet" href="css/app.css">
+    <!-- <link rel="stylesheet" href="css/app.css"> -->
     <style>
 
         /* section 
@@ -215,7 +215,7 @@
         <a href="/food_is_given">set food_now_flag to 0. returns 0.</a>
         </section>
 
-        <form action="/set_stock" method="post">
+        <form action="/set_stock_weight" method="post">
             <label for="weight">set stock weight</label>
             <input type="text" id="weight" name="weight">
             @csrf
