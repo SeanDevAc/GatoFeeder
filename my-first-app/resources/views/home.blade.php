@@ -183,11 +183,23 @@
             <tr class="toptime">
                 <th>Time</th>
                 <th>How much?</th>
+                <th>Enabled</th>
+                <th></th>
             </tr>
         @foreach ($food_timers as $timer) 
             <tr> 
                 <td> {{Illuminate\Support\Str::substr($timer->time_to_execute, 0,5)}} </td>
                 <td> {{$timer->amount_in_grams}} grams </td>
+                <td> 
+                    {{$timer->enabled}} 
+                </td>
+                <td>
+                    <form action="{{ route('food_timer.remove', $timer->id)}}" method="post" >
+                        @csrf 
+                        @method('delete')
+                        <button type="submit" title="Delete">delete</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </table>
@@ -216,9 +228,20 @@
         </section>
 
         <form action="/set_stock_weight" method="post">
+            @csrf
             <label for="weight">set stock weight</label>
             <input type="text" id="weight" name="weight">
+        </form>
+
+        <form action="/set_new_timer" method="post">
             @csrf
+            <p>new timer</p>
+            <label for="time_to_execute">Time:</label>
+            <input type="time" id="time_to_execute" name="time_to_execute" value="08:00">
+            <label for="amount_in_grams">Amount in grams:</label>
+            <input type="number" id="amount_in_grams" name="amount_in_grams" value="0">
+            <label for="timer_enabled">enable timer?</label>
+            <input type="checkbox" name="timer_enabled" id="timer_enabled" checked>
         </form>
 </body>
 </html>
