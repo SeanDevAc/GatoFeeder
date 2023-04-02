@@ -6,6 +6,7 @@ use App\Http\Controllers\CountController;
 use App\Http\Controllers\FoodStatusController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\StockInfoController;
+use App\Http\Controllers\FoodTimersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::get('/check_food_state', [FoodStatusController::class, 'check_food_state'
 
 //Route::get('/set_stock_weight/{weight}', [StockInfoController::class,  'set_stock_weight'])->whereNumber('weight');
 Route::post('/set_stock_weight', [StockInfoController::class, 'set_stock_weight']);
+
+Route::post('/set_new_timer', [FoodTimersController::class, 'set_new_timer']);
+Route::delete('/remove_timer/{id}', [FoodTimersController::class, 'remove_timer'])->name('food_timer.remove');

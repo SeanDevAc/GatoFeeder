@@ -14,14 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run() // this runs when php artisan db:seed is executed
     {
-        DB::table('leds')->insert([
-            'led_is_on' => true,
-        ]);
-
-        DB::table('counts')->insert([
-            'times_pressed' => 0,
-        ]);
-
         DB::table('food_status')->insert([
             'food_now_flag' => false,
         ]);
