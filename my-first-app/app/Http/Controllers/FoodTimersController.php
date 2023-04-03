@@ -10,9 +10,6 @@ class FoodTimersController extends Controller
     // add a food timer
     public function set_new_timer(Request $request) {
         $validator = \Validator::make($request->all(), [
-
-        // ]);
-        // $request->validate([
             'time_to_execute' => 'required|date_format:H:i|unique:food_timers,time_to_execute',
             'amount_in_grams' => 'required|integer',
             'timer_enabled' => 'nullable'
@@ -27,7 +24,6 @@ class FoodTimersController extends Controller
             $timer_enabled = true;
         } 
         
-
         $time_to_execute = $request->time_to_execute;
         $amount_in_grams = $request->amount_in_grams;
 
@@ -41,6 +37,7 @@ class FoodTimersController extends Controller
     }
 
     public function remove_timer($id) {
+
         $food_timer = FoodTimer::findOrFail($id);
         $food_timer->delete();
         return redirect('/');
