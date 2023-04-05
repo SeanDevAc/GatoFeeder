@@ -162,7 +162,7 @@ void loop() {
     // initWifi();
     //set_stock_weight_test(100);
 
-  rotate_stepper_motor(200, 1000);
+  rotate_stepper_motor(2000, 1000);
 
   print_scale_readings();
 
