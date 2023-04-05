@@ -206,7 +206,7 @@
       </section>
 
         <section class="card">
-        <a href="/food_now_true" class="button">Feed Simba</a>
+        <a href="/food_now_true" class="button">Feed Simba (15 grams)</a>
         </section>
 
         <section class="Stats">
@@ -227,12 +227,20 @@
         <a href="/food_is_given">set food_now_flag to 0. returns 0.</a>
         </section>
 
-        <form action="/set_stock_weight" method="post">
+        <form action="/set_tray_weight" method="post">
             @csrf
-            <label for="weight">set stock weight</label>
-            <input type="text" id="weight" name="weight">
+            <label for="tray_weight">set tray weight</label>
+            <input type="text" id="tray_weight" name="tray_weight">
         </form>
 
+       <form action="/set_stock_weight" method="post">
+            @csrf
+            <label for="stock_weight">set stock weight</label>
+            <input type="text" id="stock_weight" name="stock_weight">
+        </form>
+
+
+        <br><br>
         <form action="/set_new_timer" method="post">
             @csrf
             <p>new timer</p>

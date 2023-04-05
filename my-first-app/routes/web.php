@@ -6,6 +6,7 @@ use App\Http\Controllers\CountController;
 use App\Http\Controllers\FoodStatusController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\StockInfoController;
+use App\Http\Controllers\TrayInfoController;
 use App\Http\Controllers\FoodTimersController;
 
 /*
@@ -19,19 +20,15 @@ use App\Http\Controllers\FoodTimersController;
 |
 */
 
-// //Route::get('/', [LedController::class, 'index']);
-// Route::get('/toggle_led', [LedController::class, 'toggle_led']);
-// Route::get('/get_led_state', [LedController::class, 'get_led_state']);
-// Route::get('/button_pressed', [CountController::class, 'button_pressed']);
-
-// als /, dan callt het 'index' in class FoodStatusController
 Route::get('/', [MainController::class, 'index']); 
 Route::get('/food_now_true', [FoodStatusController::class, 'food_now_true']);
 Route::get('/food_is_given', [FoodStatusController::class, 'food_is_given']);
 Route::get('/check_food_state', [FoodStatusController::class, 'check_food_state']);
+Route::get('/check_food_amount', [FoodStatusController::class, 'check_food_amount']);
 
 //Route::get('/set_stock_weight/{weight}', [StockInfoController::class,  'set_stock_weight'])->whereNumber('weight');
 Route::post('/set_stock_weight', [StockInfoController::class, 'set_stock_weight']);
+Route::post('/set_tray_weight', [TrayInfoController::class, 'set_tray_weight']);
 
 Route::post('/set_new_timer', [FoodTimersController::class, 'set_new_timer']);
 Route::delete('/remove_timer/{id}', [FoodTimersController::class, 'remove_timer'])->name('food_timer.remove');

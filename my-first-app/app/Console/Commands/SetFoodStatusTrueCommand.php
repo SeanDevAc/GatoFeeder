@@ -46,6 +46,7 @@ class SetFoodStatusTrueCommand extends Command
             $time_to_execute = Carbon::parse($timer->time_to_execute)->shiftTimezone('Europe/Amsterdam');
             if ($time_to_execute->isCurrentMinute() && $timer->enabled) {
                 $food_status->food_now_flag = true;
+                $food_status->how_much_food = $timer->amount_in_grams;
                 $food_status->save();
             }
         }

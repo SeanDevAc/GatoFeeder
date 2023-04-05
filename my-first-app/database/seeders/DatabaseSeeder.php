@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('food_status')->insert([
             'food_now_flag' => false,
+            'how_much_food' => 0,
         ]);
 
         DB::table('stock_infos')->insert([
@@ -23,7 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('tray_infos')->insert([
-            'tray_weight_grams' => 0.00,
+            'tray_weight_grams' => 0,
         ]);
 
         DB::table('food_timers')->insert([ //test values.

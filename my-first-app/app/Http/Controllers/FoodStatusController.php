@@ -7,12 +7,12 @@ use App\Models\FoodStatus;
 
 class FoodStatusController extends Controller
 {
-    public function food_now_true() {
+    public function food_now_true() { //eigenlijk alleen Feed Now UI knop... ?
         $food_status = FoodStatus::first();
-        
 
         if (!($food_status->food_now_flag)) { //als food_status = 0 oftewel happy flow
             $food_status->food_now_flag = true; 
+            $food_status->how_much_food = 15;
             $food_status->save();
             return redirect('/');
         }
@@ -27,6 +27,7 @@ class FoodStatusController extends Controller
 
         if ($food_status->food_now_flag) { // if flag is still on 1. happy flow
             $food_status->food_now_flag = false;
+            $food_status->how_much_food = 0;
             $food_status->save();
             return 0;
         } 
@@ -37,5 +38,10 @@ class FoodStatusController extends Controller
     public function check_food_state() {
         $food_status = FoodStatus::first();
         return $food_status->food_now_flag;
+    }
+
+    public function check_food_amount() {
+        $food_status = FoodStatus::first();
+        return $food_status->how_much_food;
     }
 }
