@@ -46,7 +46,7 @@ WiFiMulti wifiMulti;
 //long start_time=0;
 //long REQUEST_INTERVAL_TIME = 1000;
 
-void read_scale() {//het gewicht uitlezen van de weegsensor. wordt aangeroepen in setup
+void read_scale() {//voor de setup van de weegschaal. wordt aangeroepen in setup
                       
     USE_SERIAL.begin(115200);
     Serial.begin(115200);
@@ -69,7 +69,7 @@ void read_scale() {//het gewicht uitlezen van de weegsensor. wordt aangeroepen i
     Serial.println(scale.get_units(5), 1);  // print the average of 5 readings from the ADC minus tare weight (not set) divided
             // by the SCALE parameter (not set yet)
             
-    scale.set_scale(-1965.374);
+    scale.set_scale(-1965);
       //scale.set_scale(-471.497);                      // this value is obtained by calibrating the scale with known weights; see the README for details
     scale.tare();               // reset the scale to 0
 
@@ -91,26 +91,28 @@ void read_scale() {//het gewicht uitlezen van de weegsensor. wordt aangeroepen i
     Serial.println("Readings:");
 }
 
-void print_scale_readings() {// print de scale readings uit. wordt aangeroepen in loop
-   
-  Serial.print("one reading:\t");
-  Serial.print(scale.get_units(), 1);
-  Serial.print("\t| average:\t");
-  Serial.println(scale.get_units(10), 5);
-
-  delay(5000);
+int print_scale_readings() {//geeft de value terug van de weegschaal als int.
+   Serial.print("one reading:\t");
+   int value = int(scale.get_units());
+   Serial.print(value);
+   Serial.print("\t| average:\t");
+   Serial.println(int(scale.get_units(10)), 5);
+   delay(5000);
+   return value * 10;
 }
 
-void rotate_stepper_motor(int stepsPerRevolution, int delayTime) {//stepper motor aansturing
+void rotate_stepper_motor() {//stepper motor aansturing
   // step one revolution in one direction:
-  Serial.println("clockwise");
+  
+  Serial.println("met de klok mee");
   myStepper.step(stepsPerRevolution);
-  delay(delayTime);
 
   // step one revolution in the other direction:
-  Serial.println("counterclockwise");
+  Serial.println("tegen de klok in");
   myStepper.step(-stepsPerRevolution);
-  delay(delayTime);
+
+  
+  
 }
 
 
@@ -129,9 +131,8 @@ void setup() {
         USE_SERIAL.flush();
         delay(1000);
 
-        // set the speed in rpm. is ook de enige van de stepmotor
-        myStepper.setSpeed(10);
-
+        // set the speed in rpm. //stepper. 
+        myStepper.setSpeed(5);
 
     }
 }
@@ -156,72 +157,66 @@ void initWifi() {//connect met wifi
 
 
 void loop() {
-    // USE_SERIAL.println("");
-    // sleep(1000);
-    // set_stock_weight(100);
-    // initWifi();
-    //set_stock_weight_test(100);
-
-  rotate_stepper_motor(2000, 1000);
 
   print_scale_readings();
 
+  //rotate_stepper_motor();
 
 }
 
-//vanaf line 177 code om later te toevoegen
+// //vanaf line 177 code om later te toevoegen
 
-  //wifiMulti.addAP("meme_device", "driekeerhoi");
+//   //wifiMulti.addAP("meme_device", "driekeerhoi");
     
-    //start_time = millis();
-//void set_remote_button(){}
+//     //start_time = millis();
+// //void set_remote_button(){}
 
 
-// komt later in gebruik
-// void set_stock_weight_test(int weight) {
-//   USE_SERIAL.println("stock weight functie gestart");
-//   if (WiFi.status() != WL_CONNECTED) {
-//     USE_SERIAL.println("not connected, returning");
-//     return;
-//   }
+// // komt later in gebruik
+// // void set_stock_weight_test(int weight) {
+// //   USE_SERIAL.println("stock weight functie gestart");
+// //   if (WiFi.status() != WL_CONNECTED) {
+// //     USE_SERIAL.println("not connected, returning");
+// //     return;
+// //   }
 
-//   USE_SERIAL.println("connected, continuing");
-//   HTTPClient http;
-//   http.begin("http://baspi.local/set_stock_weight/" + weight);
-//   int httpCode = http.GET();
-//   if (httpCode > 0) {
-//     USE_SERIAL.println("iets mis");
-//     if (httpCode == HTTP_CODE_OK) {
-//       String payload = http.getString();
-//       USE_SERIAL.println(payload);
-//     }
+// //   USE_SERIAL.println("connected, continuing");
+// //   HTTPClient http;
+// //   http.begin("http://baspi.local/set_stock_weight/" + weight);
+// //   int httpCode = http.GET();
+// //   if (httpCode > 0) {
+// //     USE_SERIAL.println("iets mis");
+// //     if (httpCode == HTTP_CODE_OK) {
+// //       String payload = http.getString();
+// //       USE_SERIAL.println(payload);
+// //     }
     
-//   }
-//   http.end();
-// }
+// //   }
+// //   http.end();
+// // }
 
-// komt later in gebruik
-// void set_stock_weight(int weight) {
-//   USE_SERIAL.println("functie gestart");
-//   if(wifiMulti.run() == WL_CONNECTED) {
-//     USE_SERIAL.println("wifi is connected") ;
-//     HTTPClient http;
-//     http.begin("http://baspi.local/set_stock_weight/" + weight);//link gaat hier anders zijn
-//     int httpCode = http.GET();
-//       if(httpCode > 0) {
-//         USE_SERIAL.println("uhh idk iets mis");  
-//         if(httpCode == HTTP_CODE_OK) { String payload = http.getString(); }
-//       }
-//     http.end();
-//   }
-//   USE_SERIAL.println("wifi is denk ik niet connected");
-// }
+// // komt later in gebruik
+// // void set_stock_weight(int weight) {
+// //   USE_SERIAL.println("functie gestart");
+// //   if(wifiMulti.run() == WL_CONNECTED) {
+// //     USE_SERIAL.println("wifi is connected") ;
+// //     HTTPClient http;
+// //     http.begin("http://baspi.local/set_stock_weight/" + weight);//link gaat hier anders zijn
+// //     int httpCode = http.GET();
+// //       if(httpCode > 0) {
+// //         USE_SERIAL.println("uhh idk iets mis");  
+// //         if(httpCode == HTTP_CODE_OK) { String payload = http.getString(); }
+// //       }
+// //     http.end();
+// //   }
+// //   USE_SERIAL.println("wifi is denk ik niet connected");
+// // }
 
-  //dit stuk hoort bij loop maar was voor nu niet nodig.
-    // USE_SERIAL.println("");
-    // sleep(1000);
-    // set_stock_weight(100);
-    // initWifi();
-    //set_stock_weight_test(100);
+//   //dit stuk hoort bij loop maar was voor nu niet nodig.
+//     // USE_SERIAL.println("");
+//     // sleep(1000);
+//     // set_stock_weight(100);
+//     // initWifi();
+//     //set_stock_weight_test(100);
 
 
