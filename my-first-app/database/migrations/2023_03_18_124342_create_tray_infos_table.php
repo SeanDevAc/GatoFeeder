@@ -10,7 +10,7 @@ class CreateTrayInfosTable extends Migration
     {
         Schema::create('tray_infos', function (Blueprint $table) {
             $table->id();
-            $table->float('tray_weight_grams', 4, 2);
+            $table->integer('tray_weight_grams');
             $table->timestamps();
         });
     }
