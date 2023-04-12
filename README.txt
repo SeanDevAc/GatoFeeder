@@ -6,4 +6,3 @@ Fetch, Pull, Test, Push, Request, Announce
 4. (If no errors have popped up) Push
 5. (Click on create pull) request (and wait for approval to push your feature to the develop branch)
 5. Announce (that you have made changes so your team can keep that in mind)
-nicetest
