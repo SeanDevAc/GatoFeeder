@@ -110,4 +110,8 @@ class TasksController extends Controller
             return $this->error('', 'u r not authorized for this', 403);
         }
     }
+
+    public function getTasks(Request $request) {
+        $request->validate([$request]);
+    }
 }
