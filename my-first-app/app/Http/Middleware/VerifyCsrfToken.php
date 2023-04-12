@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'set_stock_weight',
+        'set_tray_weight'
     ];
 }
