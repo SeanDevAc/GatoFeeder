@@ -16,6 +16,9 @@ WiFiMulti wifiMulti;
 const char* ssid = "meme-master";
 const char* password = "driekeerhoi";
 
+ezButton button(3);
+const int BUTTON_PIN = 23;
+
 const int stepsPerRevolution = 1000;
 #define IN1 19
 #define IN2 18
@@ -32,11 +35,12 @@ int old_stock_weight = 0;
 int old_tray_weight = 0;
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(115200);
-
   Serial.println("setup started..");
   delay(1000);
+  
+  //button.setDebounceTime(50);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 
   while (WiFi.status() != WL_CONNECTED){
     init_wifi();
@@ -57,7 +61,7 @@ void init_wifi () {
   Serial.println(WiFi.localIP());
 }
 
-int check_food_state() { //of er food gegeven moet worden. werkt
+int check_food_state() { //of er food gegeven moet worden. returnt 1 of 0
   Serial.println("checking food state on server");
   int food_state = 0;
   HTTPClient http;
@@ -74,6 +78,21 @@ int check_food_state() { //of er food gegeven moet worden. werkt
   }
   http.end();
   return food_state;
+}
+
+void set_food_now() {
+  Serial.println("setting food now on server");
+  HTTPClient http;
+  http.begin("http://willempi.local/food_now_true");
+  int httpCode = http.GET();
+  if (httpCode > 0) {
+    if (httpCode == HTTP_CODE_OK) {
+      Serial.println("yeah it worked");
+    }
+  } else {
+    Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+  }
+  http.end();
 }
 
 int set_food_is_given() { // om food flag uit te zetten. werkt
@@ -149,8 +168,8 @@ bool stock_weight_changed_enough() { //of de stock_weight genoeg is veranderd om
   return stock_weight_changed;
 }
 
-bool tray_weight_changed_enough() {
-
+bool tray_weight_changed_enough() { //todo
+  return true;
 }
 
 void conditional_update_stock_weight(){
@@ -177,23 +196,43 @@ void give_food(int weight) {
   Serial.println(weight);
 }
 
+void check_and_give_food() {
+  if (check_food_state()) {
+    Serial.println("food time");
+    give_food(get_food_amount());
+    set_food_is_given();
+  }
+  Serial.println("no food");
+}
+
+void mainflow() {
+  //button.loop();
+  int msecondsPassed = 0;
+  while ( msecondsPassed<3000 && !buttonState()) {
+    //this code while waiting on 30 seconds or button press
+    if (msecondsPassed%300==0) {Serial.print(".");}
+    delay(10);
+    msecondsPassed+= 1;
+  }
+  if (buttonState()) { // if button is pressed
+    Serial.println("button pressed");
+    set_food_now();
+    delay(1000);
+  }
+  Serial.println("okay letsgo");
+  // if button is pressed or 30 seconds have passed
+  check_and_give_food();
+  delay(100);
+  conditional_update_stock_weight();
+  delay(100);
+  conditional_update_tray_weight();
+  delay(100);
+}
+
+int buttonState() {
+  return !digitalRead(BUTTON_PIN);
+}
+
 void loop() {
-
-  
-  delay(3000);
-
-  Serial.println(get_food_amount());
-
-  // conditional_update_stock_weight();
-  // delay(50);
-  // conditional_update_tray_weight(); //todo
-  // delay(50);
-  
-  // if (check_food_state()) { //if server food flag
-  //   delay(10);
-  //   give_food(get_food_amount());
-  //   delay(10);
-  //   set_food_is_given();
-  // }
-  delay(5000);
+  mainflow();
 }
