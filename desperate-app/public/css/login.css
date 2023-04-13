@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text&display=swap');
+
+:root {
+    --accent: #FFB800;
+    --dark: #1E2730;
+    --darker: #1D252D;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sofia Sans', sans-serif;
+    color: var(--dark);
+    background-color: var(--dark);
+    text-align: center;
+}
+
+label{
+    text-align: left;
+}
+
+.nav{
+    background-color: var(--darker);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+
+h1{
+    color: var(--white);
+    font-size: 2rem;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h1:before {
+    content: attr(data-content);
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+    overflow: hidden;
+    color: var(--accent);
+}
+
+.login-shell-case{
+    margin-left: auto;
+    margin-right: auto;
+    width: 330px;
+    padding-top: 10px;
+    height: 695px;
+
+}
+
+.login-shell{
+    display: inline-block;
+    width: 100%;
+    background-color: var(--accent);
+    border-radius: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    box-shadow: 3px 3px var(--darker);
+    height: 100%;
+}
+
+.secondoption{
+    font-size: small;
+    color: black;
+}
+
+.ml-3, .ml-4, .signuplink{
+    display: inline-block;
+    color: white;
+    background-color: var(--darker);
+    width: 300px;
+    height: 50px;
+    font-size: large;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    font-family:'Sofia Sans', sans-serif;
+    border: none;
+}
+
+h2{
+    font-family: 'Bellota Text', sans-serif;
+    font-size: 40px;
+}
+
+h3{
+    font-family: 'Bellota Text', sans-serif;
+    font-size: 20px;
+}
+
+.inputtext{
+    width: 300px;
+    height: 40px;
+    top: 0px;
+    font-size: large;
+    border-radius: 10px;
+}

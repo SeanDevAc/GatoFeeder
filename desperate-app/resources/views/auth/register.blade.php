@@ -12,47 +12,41 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+            <h2 class = "welcometext"> Welcome </h2><br><br><br>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            </div>
+            <!-- Name -->
+            <div class="mt-4">
+                <x-input id="name" class="inputtext" placeholder="Name" type="text" name="name" :value="old('name')" required autofocus />
+            </div><br><br>
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+                <x-input id="email" class="inputtext" placeholder="Email address" type="email" name="email" :value="old('email')" required />
+            </div><br><br>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
+                <x-input id="password" class="inputtext" placeholder="Password"
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
-            </div>
+            </div><br><br>
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
+                <x-input id="password_confirmation" class="inputtext" placeholder="Password Confirmation"
                                 type="password"
                                 name="password_confirmation" required />
-            </div>
+            </div><br><br>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
                 <x-button class="ml-4">
                     {{ __('Register') }}
-                </x-button>
+                </x-button><br>
+
+                <a class="secondoption" href="{{ route('login') }}">
+                    {{ __('Already registered?') }}
+                </a>
             </div>
         </form>
     </x-auth-card>
