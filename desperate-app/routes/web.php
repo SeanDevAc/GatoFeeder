@@ -10,7 +10,7 @@ use App\Http\Controllers\TrayInfoController;
 use App\Http\Controllers\FoodTimersController;
 
 Route::get('/', [MainController::class, 'index'])->middleware(['auth'])->name('index'); 
-Route::get('/food_now_true', [FoodStatusController::class, 'food_now_true'])->middleware(['auth']);
+Route::get('/food_now_true', [FoodStatusController::class, 'food_now_true']);
 Route::post('/set_new_timer', [FoodTimersController::class, 'set_new_timer'])->middleware(['auth']);
 Route::delete('/remove_timer/{id}', [FoodTimersController::class, 'remove_timer'])->name('food_timer.remove')->middleware(['auth']);
 
