@@ -71,7 +71,6 @@ int check_food_state() { //of er food gegeven moet worden. returnt 1 of 0
     if (httpCode == HTTP_CODE_OK) {
       String payload = http.getString();
       food_state = payload.toInt();
-      
     }
   } else {
     Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -118,7 +117,6 @@ void set_stock_weight(int weight) { // om stock gewicht te uploaden. werkt
   WiFiClient client;
   HTTPClient http;
   http.begin(client, "http://willempi.local/set_stock_weight");
-  // http.begin(client, websiteUrl + "set_stock_weight");
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
   String httpRequestData = "stock_weight=" + String(weight);
   int httpResponseCode = http.POST(httpRequestData);  
@@ -132,7 +130,6 @@ void set_tray_weight(int weight) { // om tray gewicht te uploaden.werkt
   WiFiClient client;
   HTTPClient http;
   http.begin(client, "http://willempi.local/set_tray_weight");
-  // http.begin(client, websiteUrl + "set_stock_weight");
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
   String httpRequestData = "tray_weight=" + String(weight);
   int httpResponseCode = http.POST(httpRequestData);  
@@ -206,7 +203,6 @@ void check_and_give_food() {
 }
 
 void mainflow() {
-  //button.loop();
   int msecondsPassed = 0;
   while ( msecondsPassed<3000 && !buttonState()) {
     //this code while waiting on 30 seconds or button press
