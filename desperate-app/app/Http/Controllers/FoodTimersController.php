@@ -16,7 +16,7 @@ class FoodTimersController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return "there is already a timer at this time";
+            return "there is already a timer at this time or your amount of grams is invalid.";
         }
 
         $timer_enabled = false;

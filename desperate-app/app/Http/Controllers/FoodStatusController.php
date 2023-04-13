@@ -7,7 +7,7 @@ use App\Models\FoodStatus;
 
 class FoodStatusController extends Controller
 {
-    public function food_now_true() { //eigenlijk alleen Feed Now UI knop... ?
+    public function food_now_true() { //eigenlijk alleen Feed Now UI knop
         $food_status = FoodStatus::first();
 
         if (!($food_status->food_now_flag)) { //als food_status = 0 oftewel happy flow
@@ -17,8 +17,6 @@ class FoodStatusController extends Controller
             return redirect('/');
         }
         // bad flow: food_now_flag is already 1
-        //$food_status->food_now_flag = false;
-        //$food_status->save();
         return 'food_now_flag is already 1 ';
     }
 
