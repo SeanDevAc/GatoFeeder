@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         DB::table('food_timers')->insert([
             'time_to_execute' => '13:00:00',
             'amount_in_grams' => 60,
-            'enabled' => false,
+            'enabled' => true,
         ]);
     }
 }
