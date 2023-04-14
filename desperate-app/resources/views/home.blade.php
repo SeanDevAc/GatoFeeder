@@ -8,47 +8,50 @@
     <title>GatoFeeder</title>
     <!-- <link rel="stylesheet" href="css/app.css"> -->
     <link href="{{ URL::asset('/css/styles.css') }}" rel="stylesheet" type="text/css" >
+    <script src="{{ URL::asset('/js/addtimer.js') }}" type="text/javascript" ></script>
 </head>
 <body>
 <section class="nav"> 
-    <a href="index.html"><h1 data-content="Gato">feeder</h1></a>
+    <section class="logo"><a href="index.html" class="title"><h1 data-content="Gato">feeder</h1></a></section>
+    <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')" class="logoutbtn"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                <img class = "logout" src="{{ URL::asset('/img/door.png') }}"></img>
+                            </x-dropdown-link>
+                        </form>
     </section>
     <section>
-        
-        <!-- <form action="/set_stock_weight" method="post">
-            <label for="weight">set stock weight</label>
-            <input type="text" id="weight" name="weight">
-            @csrf
-        </form>
-        
-        <br>
-        <br>
-        <p> food_now_flag in food_status: {{$food_status->food_now_flag}} </p>
-        <br>
-        <p> Current stock: {{$stock_info->stock_weight_grams}} grams. </p>
-        <p> last updated: {{$stock_info->created_at}}</p>
-        <br>
-        <p> Left in feeding tray: {{$tray_info->tray_weight_grams}} grams.</p>
-        <p> last updated: {{$tray_info->created_at}} </p>
-        <br> -->
+    <br>
+    @isset($message)
+
+
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{$message}}
+    </div> 
+
+    @endisset
         <div class="ubercard">
-            <br>
             <section class="Schedule">
-            <h2>Schedule:</h2>
+                <section class="dule">
+                <a onclick="showForm()"><img class="menu" src="{{ URL::asset('/img/menu.png') }}"></img></a>
+                <section class="scheds">
+                    <h2 class="schema">Schedule:</h2>
+                </section>
+                </section>
             <table>
                 <tr class="toptime">
                     <th>Time</th>
                     <th>How much?</th>
-                    <th>Enabled</th>
                     <th></th>
                 </tr>
             @foreach ($food_timers as $timer) 
                 <tr> 
                     <td> {{Illuminate\Support\Str::substr($timer->time_to_execute, 0,5)}} </td>
                     <td> {{$timer->amount_in_grams}} grams </td>
-                    <td> 
-                        {{$timer->enabled}} 
-                    </td>
                     <td>
                         <form action="{{ route('food_timer.remove', $timer->id)}}" method="post" >
                             @csrf 
@@ -58,6 +61,13 @@
                     </td>
                 </tr>
             @endforeach
+                <tr id="formElement" style="display:none";>
+                <form action="/set_new_timer" method="post">
+                  <td><input type="time" id="time_to_execute" name="time_to_execute" value="08:00"></td>
+                  <td><input type="number" id="amount_in_grams" name="amount_in_grams" value="0"></td>
+                  <td><input type="submit" id="submitbutton" value="submit"></td>
+                <form>
+                </tr>
             </table>
         </section>
 
@@ -110,17 +120,9 @@
             <input type="checkbox" name="timer_enabled" id="timer_enabled" checked>
         </form>
         <br>
+        <p>last fed: {{ $food_status->updated_at}}</p>
         <br>
         <a href="{{ route('login') }}">login</a>
-        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
 </body>
 </html>
 <!-- 
