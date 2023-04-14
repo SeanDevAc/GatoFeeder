@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FoodTimer;
+use App\Models\FoodStatus;
+use App\Models\StockInfo;
+use App\Models\TrayInfo;
 
 class FoodTimersController extends Controller
 {
@@ -16,7 +19,18 @@ class FoodTimersController extends Controller
         ]);
 
         if ($validator->fails()) { // bad flow
-            return "there is already a timer at this time or your amount of grams is invalid.";
+            $food_status = FoodStatus::first();
+            $stock_info = StockInfo::latest('id')->first();
+            $tray_info = TrayInfo::latest('id')->first();
+            $food_timers = FoodTimer::all();
+            $message = "there is already a timer at this time, or your amount of grams is invalid.";
+            return view('home')->
+            with('food_status', $food_status)->
+            with('stock_info', $stock_info)->
+            with('tray_info', $tray_info)->
+            with('food_timers', $food_timers)
+           ->with('message', $message)
+            ;
         }
 
         $timer_enabled = true; //functionaleit die we hebben verwijderd omdat deze niet relevant is voor de gebruiker
