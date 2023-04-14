@@ -12,7 +12,7 @@
 </head>
 <body>
 <section class="nav"> 
-    <section class="logo"><a href="index.html" class="title"><h1 data-content="Gato">feeder</h1></a></section>
+    <section class="logo"><a class="title"><h1 data-content="Gato">feeder</h1></a></section>
     <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -63,9 +63,9 @@
             @endforeach
                 <tr id="formElement" style="display:none";>
                 <form action="/set_new_timer" method="post">
-                  <td><input type="time" id="time_to_execute" name="time_to_execute" value="08:00"></td>
-                  <td><input type="number" id="amount_in_grams" name="amount_in_grams" value="0"></td>
-                  <td><input type="submit" id="submitbutton" value="submit"></td>
+                  <td><input type="time" class="settime" id="time_to_execute" name="time_to_execute" value="08:00"></td>
+                  <td><input type="number" class="setgram" min="5" max="210" id="amount_in_grams" name="amount_in_grams" value="0"></td>
+                  <td><input type="submit" class="submit" id="submitbutton" value="Submit"></td>
                 <form>
                 </tr>
             </table>
@@ -91,7 +91,7 @@
             </section>
         </div>
 
-        <br><br>
+        <!-- <br><br>
         <a href="/food_is_given">set food_now_flag to 0. returns 0.</a>
         </section>
 
@@ -122,7 +122,7 @@
         <br>
         <p>last fed: {{ $food_status->updated_at}}</p>
         <br>
-        <a href="{{ route('login') }}">login</a>
+        <a href="{{ route('login') }}">login</a> -->
 </body>
 </html>
 <!-- 
