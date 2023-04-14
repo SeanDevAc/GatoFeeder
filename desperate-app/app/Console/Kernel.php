@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:foodyes')->everyMinute();
-    }
+        $schedule->command('command:foodyes')->everyMinute(); // als de schedule runt voert het de foodyes command elke minuut uit.
+    } // de scheduler kun je laten runnen door uit te voeren 'php artisan schedule:work'
 
     /**
      * Register the commands for the application.

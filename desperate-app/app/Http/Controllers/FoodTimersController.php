@@ -18,7 +18,7 @@ class FoodTimersController extends Controller
             'timer_enabled' => 'nullable'
         ]);
 
-        if ($validator->fails()) { // bad flow
+        if ($validator->fails()) { // bad flow, returnt de home view met alle variabelen en een error-message
             $food_status = FoodStatus::first();
             $stock_info = StockInfo::latest('id')->first();
             $tray_info = TrayInfo::latest('id')->first();

@@ -22,14 +22,14 @@ class SetFoodStatusTrueCommand extends Command
         $food_status = FoodStatus::first();
         $food_timers = FoodTimer::all();
         foreach ($food_timers as $timer) { // wordt gecheckt voor elke timer 
-            $time_to_execute = Carbon::parse($timer->time_to_execute)->shiftTimezone('Europe/Amsterdam'); 
-            if ($time_to_execute->isCurrentMinute() && $timer->enabled) {
-                $food_status->food_now_flag = true;
-                $food_status->how_much_food = $timer->amount_in_grams;
+            $time_to_execute = Carbon::parse($timer->time_to_execute)->shiftTimezone('Europe/Amsterdam'); //zet de UTC tijd naar Amsterdamtijd
+            if ($time_to_execute->isCurrentMinute() && $timer->enabled) { //als de time_to_execute van een timer gelijk is aan de huidige tijd (op de minuut)
+                $food_status->food_now_flag = true; // zet de vlag naar JA
+                $food_status->how_much_food = $timer->amount_in_grams; // zet de hoeveelheid voer van de timer naar de status
                 $food_status->save();
             }
         }
-        echo $food_status->food_now_flag;
+        echo $food_status->food_now_flag; //debugging, als je het op de commandline uitvoert wordt deze weergeven.
         return 0;
     }
 }
