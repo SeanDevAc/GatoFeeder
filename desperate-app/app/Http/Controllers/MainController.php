@@ -11,12 +11,11 @@ use App\Models\FoodTimer;
 
 class MainController extends Controller
 {
-    function index() {
-        $food_status = FoodStatus::first();
-        $stock_info = StockInfo::latest('id')->first();
+    function index() { //om alles mee te geven aan de home view.
+        $food_status = FoodStatus::first(); // hier is er maar 1 waarde van
+        $stock_info = StockInfo::latest('id')->first(); // wordt eerst gesorteerd op ID en dan de eerste gepakt; de nieuwste waarde dus
         $tray_info = TrayInfo::latest('id')->first();
-        //return $tray_info;
-        $food_timers = FoodTimer::all();
+        $food_timers = FoodTimer::all(); // alle rows van de timer tabel worden meegegeven, zodat we hierover kunnen itereren in de home view met Blade
 
         return view('home')->
             with('food_status', $food_status)->
