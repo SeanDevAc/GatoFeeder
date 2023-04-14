@@ -16,27 +16,29 @@ WiFiMulti wifiMulti;
 const char* ssid = "meme-master";
 const char* password = "driekeerhoi";
 
-ezButton button(3);
 const int BUTTON_PIN = 23;
 
-const int stepsPerRevolution = 1000;
-#define IN1 19
-#define IN2 18
-#define IN3 5
-#define IN4 17
+#define IN1 14
+#define IN2 27
+#define IN3 26
+#define IN4 25
 
-Stepper myStepper(stepsPerRevolution, IN1, IN3, IN2, IN4);
+const int stepsPerRevolution = 100;
+Stepper motor(stepsPerRevolution, IN1, IN3, IN2, IN4);
 
 const int LOADCELL_DOUT_PIN = 16;
 const int LOADCELL_SCK_PIN = 4;
 HX711 scale;
 
+const int WEIGHT_CHANGE = 10;
 int old_stock_weight = 0;
 int old_tray_weight = 0;
 
 void setup() {
   Serial.begin(115200);
   Serial.println("setup started..");
+  init_scale();
+  init_stepper_motor();
   delay(1000);
   
   //button.setDebounceTime(50);
@@ -45,7 +47,32 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED){
     init_wifi();
   }
+}
 
+void init_scale() {
+  scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+  // scale.read(); //raw readings van load cell
+  // scale.read_average(20); // avg van 20 readings
+  // scale.get_value(5);
+  // scale.get_units(5);
+  scale.set_scale(-1965);
+  scale.tare();
+}
+
+int return_scale_read_ten() {
+  float value = scale.get_units();
+  value = int(value*10);
+  return value;
+}
+
+void init_stepper_motor() {
+  motor.setSpeed(30);
+}
+
+void rotate_stepper_motor(int rotations) {
+  //motor.setSpeed(30);
+  //motor.step(rotations * stepsPerRevolution);
+  motor.step(200);
 }
 
 void init_wifi () {
@@ -150,19 +177,22 @@ int get_food_amount() { //hoeveel eten geven
 }
 
 int get_stock_weight() {
-  Serial.println("getting stock weight from sensor");
+  Serial.println("getting stock weight from sensor: ");
   int stock_weight = 0; 
-  // todo, iets met weight sensor
+  stock_weight = return_scale_read_ten();
+  Serial.println(stock_weight);
   return stock_weight;
 }
 
-bool stock_weight_changed_enough() { //of de stock_weight genoeg is veranderd om te updaten
-  bool stock_weight_changed = true;
-  int old_stock_weight;
-  
-
-  //todo
-  return stock_weight_changed;
+bool stock_weight_changed_enough(int new_weight) { //of de stock_weight genoeg is veranderd om te updaten
+  //return (abs(old_stock_weight-new_weight)<5); 
+  if (abs(old_stock_weight - new_weight) < WEIGHT_CHANGE) {
+    Serial.println("weight change insignificant");
+    old_stock_weight = new_weight;
+    return false;
+  } // if change is bigger than 5: 
+  old_stock_weight = new_weight;
+  return true;
 }
 
 bool tray_weight_changed_enough() { //todo
@@ -170,7 +200,7 @@ bool tray_weight_changed_enough() { //todo
 }
 
 void conditional_update_stock_weight(){
-  if (stock_weight_changed_enough()) {
+  if (stock_weight_changed_enough(get_stock_weight())) {
     Serial.println("stock weight changed, updating server");
     set_stock_weight(get_stock_weight());
   }
@@ -182,24 +212,21 @@ void conditional_update_tray_weight(){
   }
 }
 
-void rotate_stepper_motor(int stepsPerRevolution, int delayTime) {
-  myStepper.step(stepsPerRevolution);
-  delay(delayTime);
-}
-
 void give_food(int weight) {
   //iets met motor bewegen
+  rotate_stepper_motor(weight/10);
   Serial.print("giving food: ");
   Serial.println(weight);
 }
 
 void check_and_give_food() {
-  if (check_food_state()) {
-    Serial.println("food time");
-    give_food(get_food_amount());
-    set_food_is_given();
+  if (!check_food_state()) {
+    Serial.println("no food");
+    return;
   }
-  Serial.println("no food");
+  Serial.println("food time");
+  give_food(get_food_amount());
+  set_food_is_given();
 }
 
 int buttonState() {
@@ -225,10 +252,11 @@ void mainflow() {
   delay(100);
   conditional_update_stock_weight();
   delay(100);
-  conditional_update_tray_weight();
-  delay(100);
+  //conditional_update_tray_weight();
+  //delay(100);
 }
 
 void loop() {
   mainflow();
+
 }
