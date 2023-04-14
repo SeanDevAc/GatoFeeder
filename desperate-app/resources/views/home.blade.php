@@ -63,8 +63,9 @@
             @endforeach
                 <tr id="formElement" style="display:none";>
                 <form action="/set_new_timer" method="post">
+                    @csrf
                   <td><input type="time" class="settime" id="time_to_execute" name="time_to_execute" value="08:00"></td>
-                  <td><input type="number" class="setgram" min="5" max="210" id="amount_in_grams" name="amount_in_grams" value="0"></td>
+                  <td><input type="number" class="setgram" min="5" max="210" id="amount_in_grams" name="amount_in_grams" value="5"> </td>
                   <td><input type="submit" class="submit" id="submitbutton" value="Submit"></td>
                 <form>
                 </tr>
@@ -80,7 +81,7 @@
             <h2 class="Statstext">Stats:</h2>
             <table>
             <tr class="topstat">
-                <td>Stock: {{$stock_info->stock_weight_grams}}</td>
+                <td>Stock: {{$stock_info->stock_weight_grams}} grams</td>
                 <td id="valuestock"></td>  
             </tr>
             <tr class="bottomstat">
