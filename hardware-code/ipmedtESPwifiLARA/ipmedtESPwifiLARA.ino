@@ -94,11 +94,11 @@ void set_food_now() {
   http.end();
 }
 
-int set_food_is_given() { // om food flag uit te zetten. werkt
+int set_food_is_given() { // om food flag uit te zetten op de server
   Serial.println("setting food flag on server to false");
   int food_now_state = 0;
   HTTPClient http;
-  http.begin("http://willempi.local/food_is_given");
+  http.begin("http://willempi.local/food_is_given"); 
   int httpCode = http.GET();
   if (httpCode > 0) {
     if (httpCode == HTTP_CODE_OK) {
@@ -112,20 +112,20 @@ int set_food_is_given() { // om food flag uit te zetten. werkt
   return food_now_state;
 }
 
-void set_stock_weight(int weight) { // om stock gewicht te uploaden. werkt
+void set_stock_weight(int weight) { // om stock gewicht te uploaden op de server
   Serial.println("setting stock weight on server");
   WiFiClient client;
   HTTPClient http;
   http.begin(client, "http://willempi.local/set_stock_weight");
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  String httpRequestData = "stock_weight=" + String(weight);
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded"); // de http POST header
+  String httpRequestData = "stock_weight=" + String(weight); // de daadwerkelijke data
   int httpResponseCode = http.POST(httpRequestData);  
-  Serial.print("HTTP Response code: ");
+  Serial.print("HTTP Response code: "); // debugging porpoises; returnt gelukkig altijd 200 OK
   Serial.println(httpResponseCode);
   http.end();
 }
 
-void set_tray_weight(int weight) { // om tray gewicht te uploaden.werkt
+void set_tray_weight(int weight) { // om tray gewicht te uploaden op de server
   Serial.println("setting tray weight on server");
   WiFiClient client;
   HTTPClient http;
@@ -202,6 +202,10 @@ void check_and_give_food() {
   Serial.println("no food");
 }
 
+int buttonState() {
+  return !digitalRead(BUTTON_PIN);
+}
+
 void mainflow() {
   int msecondsPassed = 0;
   while ( msecondsPassed<3000 && !buttonState()) {
@@ -223,10 +227,6 @@ void mainflow() {
   delay(100);
   conditional_update_tray_weight();
   delay(100);
-}
-
-int buttonState() {
-  return !digitalRead(BUTTON_PIN);
 }
 
 void loop() {
