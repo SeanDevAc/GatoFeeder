@@ -32,9 +32,38 @@
             font-size: 18px;
         }
 
-        .nav{
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: var(--darker);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100vw - 60px);
+        }
+        
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 60px;
+        }
+        
+        .logout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 31px;
+            text-decoration: none;
+            color: var(--accent);
+            width: 29px;
+            height: 29px;
         }
 
         h1{
@@ -155,3 +184,62 @@
             background-color: transparent;
             border: none;
         }
+
+         /* The alert message box */
+        .alert {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+            width: 330px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* The close button */
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+
+        .dule{
+            display: flex;
+            width: 100%;
+        }
+        
+        .scheds{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% - 20px);
+        }
+        
+        .schema{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .menu{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            height:20px;
+            width: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
