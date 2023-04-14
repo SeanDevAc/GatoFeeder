@@ -19,10 +19,7 @@ class FoodTimersController extends Controller
             return "there is already a timer at this time or your amount of grams is invalid.";
         }
 
-        $timer_enabled = false;
-        if ($request->has("timer_enabled")) {
-            $timer_enabled = true;
-        } 
+        $timer_enabled = true; 
         
         $time_to_execute = $request->time_to_execute;
         $amount_in_grams = $request->amount_in_grams;
