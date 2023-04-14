@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FoodStatus;
+use App\Models\StockInfo;
+use App\Models\TrayInfo;
+use App\Models\FoodTimer;
 
 class FoodStatusController extends Controller
 {
@@ -17,7 +20,22 @@ class FoodStatusController extends Controller
             return redirect('/');
         }
         // bad flow: food_now_flag is already 1
-        return 'food_now_flag is already 1 ';
+        //return view('home')->with('message', 'food_now_flag is already 1 ');
+        //return back()->with('message', 'double request');
+        $food_status = FoodStatus::first();
+        $stock_info = StockInfo::latest('id')->first();
+        $tray_info = TrayInfo::latest('id')->first();
+        //return $tray_info;
+        $food_timers = FoodTimer::all();
+        $message = 'you already pressed this, heb ff geduld';
+
+        return view('home')->
+            with('food_status', $food_status)->
+            with('stock_info', $stock_info)->
+            with('tray_info', $tray_info)->
+            with('food_timers', $food_timers)
+           ->with('message', $message)
+            ;
     }
 
     public function food_is_given() {
